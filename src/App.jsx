@@ -5,12 +5,11 @@ const App = () => {
   const [author, setAuthor] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [fade, setFade] = useState(true); // for fade animation
+  const [fade, setFade] = useState(true); 
 
-  // ✅ Working API (CORS enabled)
   const fetchQuote = async () => {
     setIsLoading(true);
-    setFade(false); // start fade-out
+    setFade(false); 
     try {
       const res = await fetch("https://dummyjson.com/quotes/random");
       if (!res.ok) throw new Error("Failed to load quote");
@@ -20,7 +19,7 @@ const App = () => {
         setQuote(data.quote || "Keep fighting — every day is a victory!");
         setAuthor(data.author || "Anonymous");
         setIsLoading(false);
-        setFade(true); // fade-in new quote
+        setFade(true); 
       }, 400);
     } catch (err) {
       console.error("Quote fetch failed:", err);
@@ -30,8 +29,6 @@ const App = () => {
       setFade(true);
     }
   };
-
-  // ✅ Fetch initial + auto-refresh every 20s
   useEffect(() => {
     fetchQuote();
     const interval = setInterval(fetchQuote, 20000);
